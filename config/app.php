@@ -211,4 +211,6 @@ return [
 
     ],
 
+    'faker_locale' => env('FAKER_LOCALE', 'zh_CN'),
+
 ];
