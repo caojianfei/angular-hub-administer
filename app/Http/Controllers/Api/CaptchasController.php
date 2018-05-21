@@ -26,9 +26,9 @@ class CaptchasController extends BaseController
         ], $expire_at);
 
         return $this->response->created(null, [
-            'captchaKey' => $key,
-            'expiredAt' => $expire_at->toDateTimeString(),
-            'captchaImageContent' => $captcha->inline()
+            'captcha_key' => $key,
+            'expired_at' => $expire_at->toDateTimeString(),
+            'captchaImage_content' => $captcha->inline()
         ]);
     }
 
