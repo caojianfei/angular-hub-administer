@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+$api = app(\Dingo\Api\Routing\Router::class);
+
+$api->version('v1', ['namespace' => 'App\\Http\\Controllers\\Api'], function($api) {
+
+    $api->post('captchas', 'CaptchasController@store');
 });
