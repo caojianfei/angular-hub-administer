@@ -21,5 +21,7 @@ $api = app(\Dingo\Api\Routing\Router::class);
 
 $api->version('v1', ['namespace' => 'App\\Http\\Controllers\\Api'], function($api) {
 
-    $api->post('captchas', 'CaptchasController@store');
+    $api->post('captchas', 'CaptchasController@store')->name('captchas.create');
+    $api->post('register', 'RegisterController@store')->name('register');
+
 });
