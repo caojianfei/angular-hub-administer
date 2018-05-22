@@ -23,5 +23,6 @@ $api->version('v1', ['namespace' => 'App\\Http\\Controllers\\Api'], function($ap
 
     $api->post('captchas', 'CaptchasController@store')->name('captchas.create');
     $api->post('register', 'RegisterController@store')->name('register');
+    $api->post('login', 'LoginController@login')->name('login');
 
 });
