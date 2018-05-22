@@ -25,5 +25,7 @@ $api->version('v1', ['namespace' => 'App\\Http\\Controllers\\Api'], function($ap
     $api->post('register', 'RegisterController@store')->name('register');
     $api->post('login', 'LoginController@login')->name('login');
     $api->post('password/email', 'ForgotPasswordController@sendEmailToken')->name('password.email');
+    $api->post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
+
 
 });
