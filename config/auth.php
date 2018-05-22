@@ -70,6 +70,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'api-users' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Api\User::class,
+        ]
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -94,6 +99,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'api-users' => [
+            'provider' => 'api-users',
             'table' => 'password_resets',
             'expire' => 60,
         ],

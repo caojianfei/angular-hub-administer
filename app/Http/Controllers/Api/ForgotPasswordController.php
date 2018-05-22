@@ -15,7 +15,7 @@ class ForgotPasswordController extends BaseController
      */
     public function sendEmailToken(ForgotPasswordRequest $request)
     {
-        $response = Password::broker()->sendResetLink(request(['email']));
+        $response = Password::broker('api-users')->sendResetLink(request(['email']));
 
         return $response === Password::RESET_LINK_SENT
             ? $this->response->created()
