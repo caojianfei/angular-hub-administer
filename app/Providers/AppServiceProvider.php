@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        $this->registerModelObservers();
     }
 
     /**
@@ -25,5 +27,15 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * 注册模型观察器
+     *
+     * @return void
+     */
+    protected function registerModelObservers()
+    {
+        \App\Models\Article::observe(\App\Observers\ArticleObserver::class);
     }
 }

@@ -19,13 +19,19 @@ use Illuminate\Http\Request;
 
 $api = app(\Dingo\Api\Routing\Router::class);
 
-$api->version('v1', ['namespace' => 'App\\Http\\Controllers\\Api'], function($api) {
+$api->version('v1', [
+    'namespace' => 'App\\Http\\Controllers\\Api',
+    'middleware' => 'serializer:array'
+], function($api) {
 
     $api->post('captchas', 'CaptchasController@store')->name('captchas.create');
     $api->post('register', 'RegisterController@store')->name('register');
     $api->post('login', 'LoginController@login')->name('login');
     $api->post('password/email', 'ForgotPasswordController@sendEmailToken')->name('password.email');
     $api->post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
+
+
+    $api->resource('articles', 'ArticleController');
 
 
 });

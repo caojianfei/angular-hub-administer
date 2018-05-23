@@ -24,7 +24,7 @@ class CreateArticlesTable extends Migration
             $table->integer('like_count', false, true)->index()->default(0);
             $table->integer('order')->default(0);
             $table->text('excerpt');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
