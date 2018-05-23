@@ -17,8 +17,8 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->integer('category_id', false, true);
             $table->string('name')->comment('标签名称');
-            $table->string('icon')->comment('标签图片地址');
-            $table->string('description');
+            $table->string('icon')->comment('标签图片地址')->nullable();
+            $table->string('description')->comment('标签描述')->nullable();
             $table->timestamps();
         });
     }
