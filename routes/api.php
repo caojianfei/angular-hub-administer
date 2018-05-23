@@ -21,7 +21,7 @@ $api = app(\Dingo\Api\Routing\Router::class);
 
 $api->version('v1', [
     'namespace' => 'App\\Http\\Controllers\\Api',
-    'middleware' => 'serializer:array'
+    //'middleware' => 'serializer:array'
 ], function($api) {
 
     $api->post('captchas', 'CaptchasController@store')->name('captchas.create');
@@ -30,8 +30,10 @@ $api->version('v1', [
     $api->post('password/email', 'ForgotPasswordController@sendEmailToken')->name('password.email');
     $api->post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
 
-
     $api->resource('articles', 'ArticleController');
+    //$api->get('articles/{article}', 'ArticleController@show');
+
+    $api->resource('users', 'UsersController');
 
 
 });
