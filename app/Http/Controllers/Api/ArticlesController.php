@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
+use App\Transformers\ArticleTransformer;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\ArticleRequest;
 
@@ -10,7 +11,7 @@ class ArticlesController extends BaseController
 {
     function __construct()
     {
-        $this->middleware('jwt.auth')->except(['index', 'show']);
+        $this->middleware('api.auth')->except([ 'show']);
     }
 
     /**
@@ -19,34 +20,30 @@ class ArticlesController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {}
+    {
+    }
 
 
     /**
      * 新增文章
      *
      * @param ArticleRequest $request
+     * @param Article $article
      * @return \Dingo\Api\Http\Response
      */
     public function store(ArticleRequest $request, Article $article)
     {
-
         $article->fill($request->all());
         $article->user_id = auth()->id();
         $article->save();
 
-        return $this->response->created(null, $article);
+        return $this->response->item($article, new ArticleTransformer())->setStatusCode(201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Article $article)
     {
-        return 'show';
+        return $this->response->item($article, new ArticleTransformer());
     }
 
     /**
@@ -56,9 +53,9 @@ class ArticlesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        return 'update';
+        return $article;
     }
 
     /**
