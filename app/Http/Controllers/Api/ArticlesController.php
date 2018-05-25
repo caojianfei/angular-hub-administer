@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\ArticleRequest;
 
-class ArticleController extends BaseController
+class ArticlesController extends BaseController
 {
     function __construct()
     {

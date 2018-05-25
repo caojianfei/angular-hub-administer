@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Api\User;
 use App\Transformers\UserTransformer;
-use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\Api\UserRequest;
 
 class UsersController extends BaseController
 {
@@ -17,12 +17,11 @@ class UsersController extends BaseController
     /**
      * 用户注册
      *
-     * @param RegisterRequest $request
+     * @param UserRequest $request
      * @return \Dingo\Api\Http\Response
      * @throws \ErrorException
-     * @throws \Exception
      */
-    public function store(RegisterRequest $request)
+    public function store(UserRequest $request)
     {
         $verify_data = cache($request->captch_key);
 
