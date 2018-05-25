@@ -50,7 +50,7 @@ class PasswordsController extends BaseController
 
     protected function sendFailSendEmailResponse($response)
     {
-        throw new ResourceException("email 发送失败", ['email' => trans($response)]);
+        throw new ResourceException(null, ['email' => trans($response)]);
     }
 
     /**
@@ -72,7 +72,7 @@ class PasswordsController extends BaseController
 
     protected function sendFailedResetPasswordResponse($response)
     {
-        throw new UpdateResourceFailedException("密码重置失败", ['email' => trans($response)]);
+        throw new UpdateResourceFailedException(null, ['email' => trans($response)]);
     }
 
 

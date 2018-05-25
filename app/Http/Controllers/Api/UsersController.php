@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Api\User;
 use App\Transformers\UserTransformer;
 use App\Http\Requests\Api\UserRequest;
+use Dingo\Api\Exception\ValidationHttpException;
 
 class UsersController extends BaseController
 {
@@ -19,18 +20,18 @@ class UsersController extends BaseController
      *
      * @param UserRequest $request
      * @return \Dingo\Api\Http\Response
-     * @throws \ErrorException
+     * @throws \Exception
      */
     public function store(UserRequest $request)
     {
         $verify_data = cache($request->captch_key);
 
         if (!$verify_data) {
-            return $this->response->array(['captch' => '验证码已经过期'])->setStatusCode(422);
+            throw new ValidationHttpException(['captch' => trans('business.verification_code.expired')]);
         }
 
         if (!hash_equals(strtolower($request->captch), strtolower($verify_data['code']))) {
-            return $this->response->array(['captch' => '验证码错误'])->setStatusCode(422);
+            throw new ValidationHttpException(['captch' => trans('business.verification_code.error')]);
         }
 
         // 清除验证码

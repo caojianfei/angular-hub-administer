@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\AuthorizationRequest;
+use Dingo\Api\Exception\ValidationHttpException;
 
 class AuthorizationsController extends BaseController
 {
     public function store(AuthorizationRequest $request)
     {
         if (! $token = auth('api')->attempt(request(['email', 'password']))) {
-            return $this->response->array(['email' => '账号或密码错误'])->setStatusCode(422);
+            throw new ValidationHttpException(['email' => trans('auth.failed')]);
         }
 
         return $this->responseSuccessLogin($token);

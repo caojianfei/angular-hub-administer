@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerModelObservers();
+
+        $this->registeApiErrorCode();
     }
 
     /**
@@ -38,4 +40,15 @@ class AppServiceProvider extends ServiceProvider
     {
         \App\Models\Article::observe(\App\Observers\ArticleObserver::class);
     }
+
+    protected function registeApiErrorCode()
+    {
+        \API::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            abort(404);
+        });
+        \API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            abort(403, $exception->getMessage());
+        });
+    }
+
 }
