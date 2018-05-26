@@ -43,7 +43,7 @@ class ArticlesController extends BaseController
     public function store(ArticleRequest $request, Article $article)
     {
         $article->fill($request->all());
-        $article->user_id = auth()->id();
+        $article->user_id = auth('api')->id();
         $article->save();
 
         $article->tags()->sync($request->tags);
