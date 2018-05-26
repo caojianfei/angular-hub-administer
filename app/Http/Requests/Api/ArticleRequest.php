@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Rules\ConfirmCategory;
-use Dingo\Api\Http\FormRequest;
 
 class ArticleRequest extends FormRequest
 {
@@ -24,28 +22,29 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
-        switch ($this->method) {
+        switch ($this->method()) {
             case 'POST':
                 {
                     return[
                         'title' => 'required|string',
                         'content' => 'required|string',
+                        'tags' => 'required|array',
                         'category_id' => [
                             'required',
                             'integer',
-                            new ConfirmCategory()
+                            'exists:categories,id'
                         ]
                     ];
                 }
-            case 'PUT':
+            case 'PATCH':
                 {
                     return [
-                        'title' => 'filled|string',
-                        'content' => 'filled|string',
+                        'title' => 'string',
+                        'content' => 'string',
+                        'tags' => 'array',
                         'category_id' => [
-                            'filled',
                             'integer',
-                            new ConfirmCategory()
+                            'exists:categories,id'
                         ]
                     ];
                 }
@@ -54,5 +53,15 @@ class ArticleRequest extends FormRequest
                     return [];
                 }
         }
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => '文章标题',
+            'content' => '文章内容',
+            'tags' => '文章标签',
+            'category_id' => '文章分类'
+        ];
     }
 }

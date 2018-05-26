@@ -47,6 +47,8 @@ $api->version('v1', [
         // 获取当前登录的用户
         $api->get('user', 'UsersController@me')->name('user.show');
 
+        $api->resource('articles', 'ArticlesController');
+
     });
 
 

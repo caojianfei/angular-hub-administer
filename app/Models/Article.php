@@ -40,4 +40,15 @@ class Article extends Model
     public $fillable = [
         'title', 'content', 'category_id', 'excerpt', 'slug'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\Api\User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
 }

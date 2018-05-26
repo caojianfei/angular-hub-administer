@@ -4,23 +4,32 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
 use App\Transformers\ArticleTransformer;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\ArticleRequest;
 
 class ArticlesController extends BaseController
 {
     function __construct()
     {
-        $this->middleware('api.auth')->except([ 'show']);
+        $this->middleware('api.auth')->except([ 'index', 'show']);
     }
 
     /**
-     * Display a listing of the resource.
+     * 获取文章列表
      *
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return \Dingo\Api\Http\Response
      */
-    public function index()
+    public function index(Article $article)
     {
+        $query = $article->query();
+
+        if ($category_id = \request('category_id')) {
+            $query->where('category_id', $category_id);
+        }
+
+        $articles = $query->paginate(\request('per_page', 20));
+
+        return $this->response->paginator($articles, new ArticleTransformer());
     }
 
 
@@ -37,35 +46,52 @@ class ArticlesController extends BaseController
         $article->user_id = auth()->id();
         $article->save();
 
+        $article->tags()->sync($request->tags);
+
         return $this->response->item($article, new ArticleTransformer())->setStatusCode(201);
     }
 
 
+    /**
+     * 查看文章
+     *
+     * @param Article $article
+     * @return \Dingo\Api\Http\Response
+     */
     public function show(Article $article)
     {
         return $this->response->item($article, new ArticleTransformer());
     }
 
     /**
-     * Update the specified resource in storage.
+     * 文章更新
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ArticleRequest $request
+     * @param Article $article
+     * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
-        return $article;
+        $article->update($request->only(['title', 'content', 'category_id']));
+
+        if ($request->tags) {
+            $article->tags()->sync($request->tags);
+        }
+
+        return $this->response->item($article, new ArticleTransformer());
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 文章删除
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return \Dingo\Api\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(ArticleRequest $request, Article $article)
     {
-        return 'destroy';
+        $article->delete();
+
+        return $this->response->noContent();
     }
 }
