@@ -46,8 +46,10 @@ $api->version('v1', [
         $api->post('captchas', 'CaptchasController@store')->name('captchas.store');
         // 获取当前登录的用户
         $api->get('user', 'UsersController@me')->name('user.show');
-
+        // 文章
         $api->resource('articles', 'ArticlesController');
+        // 文件上传
+        $api->post('image', 'UploadController@image')->name('upload.image');
 
     });
 
