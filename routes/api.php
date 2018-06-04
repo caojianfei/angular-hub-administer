@@ -50,6 +50,8 @@ $api->version('v1', [
         $api->resource('articles', 'ArticlesController');
         // 文件上传
         $api->post('image', 'UploadController@image')->name('upload.image');
+        // 标签
+        $api->resource('tags', 'TagsController');
 
     });
 
