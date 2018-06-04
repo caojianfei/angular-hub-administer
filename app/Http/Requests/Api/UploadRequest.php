@@ -25,9 +25,17 @@ class UploadRequest extends FormRequest
     public function rules()
     {
 
-        //dump($this->route()->getName());
-        return [
-
-        ];
+        switch ($this->route()->getName()) {
+            case 'image':
+                {
+                    return [
+                        'file' => 'image|max:5242880'
+                    ];
+                }
+            default:
+                {
+                    return [];
+                }
+        }
     }
 }
