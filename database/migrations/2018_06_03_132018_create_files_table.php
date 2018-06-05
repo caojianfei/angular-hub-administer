@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id', false, true)->nullable();
             $table->integer('size');
-            $table->string('mine_tppe');
+            $table->string('mine_type');
             $table->string('original_name');
             $table->string('original_extension');
             $table->string('save_path');
