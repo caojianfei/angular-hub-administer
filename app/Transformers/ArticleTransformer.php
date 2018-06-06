@@ -7,7 +7,7 @@ use League\Fractal\TransformerAbstract;
 
 class ArticleTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['user', 'tags'];
+    protected $availableIncludes = ['user', 'tags', 'category'];
 
     public function transform(Article $article)
     {
@@ -39,5 +39,10 @@ class ArticleTransformer extends TransformerAbstract
     public function includeTags(Article $article)
     {
         return $this->collection($article->tags, new TagTransformers());
+    }
+
+    public function includeCategory(Article $article)
+    {
+        return $this->item($article->category, new CategoryTransformer());
     }
 }

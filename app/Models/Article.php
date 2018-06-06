@@ -52,6 +52,11 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function hot(Builder $query) {
 
        return $query->orderBy('replay_count', 'desc')
