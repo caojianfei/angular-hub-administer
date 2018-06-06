@@ -8,7 +8,7 @@ $categories = \App\Models\Category::pluck('id')->toArray();
 $factory->define(\App\Models\Article::class, function (Faker $faker) use($users, $categories) {
     return [
         'user_id' => array_random($users),
-        'category_id' => 1,//array_random($categories),
+        'category_id' => array_random($categories),
         'write_type' => array_random([0, 1, 2]),
         'title' => $faker->sentence(),
         'content' => $faker->text(),

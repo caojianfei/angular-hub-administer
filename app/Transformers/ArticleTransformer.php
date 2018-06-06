@@ -45,4 +45,5 @@ class ArticleTransformer extends TransformerAbstract
     {
         return $this->item($article->category, new CategoryTransformer());
     }
+
 }

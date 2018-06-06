@@ -52,7 +52,8 @@ $api->version('v1', [
         $api->post('image', 'UploadController@image')->name('upload.image');
         // 标签
         $api->resource('tags', 'TagsController');
-
+        // 点赞
+        $api->post('article/{article}/like', 'ArticleLikeController@store');
     });
 
 

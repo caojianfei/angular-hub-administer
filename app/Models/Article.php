@@ -44,7 +44,7 @@ class Article extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\Api\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function tags()
@@ -62,6 +62,11 @@ class Article extends Model
        return $query->orderBy('replay_count', 'desc')
                     ->orderBy('like_count', 'desc')
                     ->orderBy('view_count', 'desc');
+    }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'user_like_article');
     }
 
 }
