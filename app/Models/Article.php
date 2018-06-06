@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -38,7 +39,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     public $fillable = [
-        'title', 'content', 'category_id', 'excerpt', 'slug'
+        'title', 'content', 'category_id', 'excerpt', 'slug', 'write_type'
     ];
 
     public function user()
@@ -49,6 +50,13 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function hot(Builder $query) {
+
+       return $query->orderBy('replay_count', 'desc')
+                    ->orderBy('like_count', 'desc')
+                    ->orderBy('view_count', 'desc');
     }
 
 }

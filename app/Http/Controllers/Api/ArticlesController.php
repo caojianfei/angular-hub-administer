@@ -22,9 +22,24 @@ class ArticlesController extends BaseController
     public function index(Article $article)
     {
         $query = $article->query();
-
+        // 分类
         if ($category_id = \request('category_id')) {
             $query->where('category_id', $category_id);
+        }
+
+        // 热门
+        if (request('hot')) {
+            $query = $article->hot($query);
+        }
+
+        // 倒序
+        if (request('recent')) {
+            $query->latest();
+        }
+
+        // 最新回复
+        if (request('recent_replay')) {
+            $query->latest('last_replay_time');
         }
 
         $articles = $query->paginate(\request('per_page', 20));

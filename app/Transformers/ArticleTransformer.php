@@ -14,9 +14,19 @@ class ArticleTransformer extends TransformerAbstract
         return [
             'id' => $article->id,
             'user_id' => $article->id,
+            'write_type' => $article->write_type,
             'title' => $article->title,
             'content' => $article->content,
             'category_id' => $article->category_id,
+            'replay_count' => $article->replay_count,
+            'view_count' => $article->view_count,
+            'like_count' => $article->like_count,
+            'order' => $article->order,
+            'excerpt' => $article->excerpt,
+            'slug' => $article->slug,
+            'last_replay_time' => $article->last_replay_time,
+            'created_at' => $article->created_at,
+            'updated_at' => $article->updated_at,
         ];
     }
 
