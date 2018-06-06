@@ -25,8 +25,8 @@ class ArticleTransformer extends TransformerAbstract
             'excerpt' => $article->excerpt,
             'slug' => $article->slug,
             'last_replay_time' => $article->last_replay_time,
-            'created_at' => $article->created_at,
-            'updated_at' => $article->updated_at,
+            'created_at' => $article->created_at->toDateTimeString(),
+            'updated_at' => $article->updated_at->toDateTimeString(),
         ];
     }
 
