@@ -44,8 +44,6 @@ $api->version('v1', [
     ], function ($api) {
         // 获取图片验证码
         $api->post('captchas', 'CaptchasController@store')->name('captchas.store');
-        // 获取当前登录的用户
-        $api->get('user', 'UsersController@me')->name('user.show');
         // 文章
         $api->resource('articles', 'ArticlesController');
         // 文件上传
@@ -54,6 +52,11 @@ $api->version('v1', [
         $api->resource('tags', 'TagsController');
         // 点赞
         $api->post('article/{article}/like', 'ArticleLikeController@store');
+
+        // 获取当前登录的用户
+        $api->get('user', 'UsersController@me')->name('user.show');
+        // 个人信息修改
+        $api->patch('user', 'UsersController@update')->name('user.update');
     });
 
 

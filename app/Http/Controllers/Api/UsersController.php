@@ -44,6 +44,19 @@ class UsersController extends BaseController
     }
 
     /**
+     * 修改用户资料
+     *
+     * @param UserRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update(UserRequest $request)
+    {
+        $user = auth('api')->user();
+        $user->update(request()->all());
+        return $this->response->item($user, new UserTransformer());
+    }
+
+    /**
      * 请求当前登录用户资源
      *
      * @return \Dingo\Api\Http\Response

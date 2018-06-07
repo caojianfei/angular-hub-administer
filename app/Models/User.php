@@ -37,7 +37,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'information', 'avatar_id'
+    ];
+
+    protected $casts = [
+        'information' => 'array'
     ];
 
     /**
@@ -51,6 +55,16 @@ class User extends Authenticatable implements JWTSubject
 
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setInformationAttribute($vale)
+    {
+        $this->attributes['information'] = json_encode($vale);
+    }
+
+    public function avatar()
+    {
+        return $this->belongsTo(File::class, 'avatar_id');
     }
 
 

@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('avatar_id')->nullable()->comment('头像id');
+            $table->json('information')->comment('个人资料')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
