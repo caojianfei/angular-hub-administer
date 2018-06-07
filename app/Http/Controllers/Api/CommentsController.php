@@ -59,9 +59,12 @@ class CommentsController extends BaseController
      * @param Replay $replay
      * @param CommentRequest $request
      * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Replay $replay, CommentRequest $request)
     {
+        $this->authorize('update', $replay);
+
         $replay->content = $request->input('content');
         $replay->save();
 
@@ -73,10 +76,13 @@ class CommentsController extends BaseController
      *
      * @param Replay $replay
      * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @throws \Exception
      */
     public function destroy(Replay $replay)
     {
+        $this->authorize('delete', $replay);
+
         $replay->delete();
 
         return $this->response->noContent();

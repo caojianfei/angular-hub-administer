@@ -84,9 +84,12 @@ class ArticlesController extends BaseController
      * @param ArticleRequest $request
      * @param Article $article
      * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(ArticleRequest $request, Article $article)
     {
+        $this->authorize('update', $article);
+
         $article->update($request->only(['title', 'content', 'category_id']));
 
         if ($request->tags) {
@@ -105,6 +108,8 @@ class ArticlesController extends BaseController
      */
     public function destroy(ArticleRequest $request, Article $article)
     {
+        $this->authorize('delete', $article);
+
         $article->delete();
 
         return $this->response->noContent();
