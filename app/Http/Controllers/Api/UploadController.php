@@ -34,7 +34,8 @@ class UploadController extends BaseController
         return $this->response->array([
             "success" => true,
             "msg" => "upload success",
-            "file_path" => $result['url']
+            "file_path" => $result['url'],
+            "file_id" => $result['id']
         ]);
 
     }
@@ -72,7 +73,8 @@ class UploadController extends BaseController
         return [
             'full_path' => $floder . '/' . $file_name,
             'url' => asset("$floder/$file_name"),
-            'file' => $model
+            'file' => $model,
+            'id' => $model->id
         ];
     }
 
