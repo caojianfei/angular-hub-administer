@@ -60,7 +60,7 @@ $api->version('v1', [
         $api->post('article/{article}/comments', 'CommentsController@store')->name('comments.store');
         $api->get('comments/{replay}', 'CommentsController@show')->name('comments.show');
         $api->patch('comments/{replay}', 'CommentsController@update')->name('comments.update');
-        $api->delete('comments/{replay}', 'CommentsController@delete')->name('comments.delete');
+        $api->delete('comments/{replay}', 'CommentsController@destroy')->name('comments.destroy');
     });
 
 

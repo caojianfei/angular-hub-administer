@@ -75,7 +75,7 @@ class CommentsController extends BaseController
      * @return \Dingo\Api\Http\Response
      * @throws \Exception
      */
-    public function delete(Replay $replay)
+    public function destroy(Replay $replay)
     {
         $replay->delete();
 
