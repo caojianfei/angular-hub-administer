@@ -25,5 +25,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Replay extends Model
 {
-    //
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function replayComment()
+    {
+        return $this->belongsTo(Replay::class, 'replay_id');
+    }
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
+
 }

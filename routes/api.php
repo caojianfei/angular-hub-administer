@@ -52,11 +52,15 @@ $api->version('v1', [
         $api->resource('tags', 'TagsController');
         // 点赞
         $api->post('article/{article}/like', 'ArticleLikeController@store');
-
         // 获取当前登录的用户
         $api->get('user', 'UsersController@me')->name('user.show');
         // 个人信息修改
         $api->patch('user', 'UsersController@update')->name('user.update');
+        // 文章回复
+        $api->post('article/{article}/comments', 'CommentsController@store')->name('comments.store');
+        $api->get('comments/{replay}', 'CommentsController@show')->name('comments.show');
+        $api->patch('comments/{replay}', 'CommentsController@update')->name('comments.update');
+        $api->delete('comments/{replay}', 'CommentsController@delete')->name('comments.delete');
     });
 
 
