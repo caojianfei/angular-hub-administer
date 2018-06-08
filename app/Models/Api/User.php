@@ -24,6 +24,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $avatar_id
+ * @property array $information 个人资料
+ * @property-read \App\Models\File|null $avatar
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api\User whereAvatarId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api\User whereInformation($value)
  */
 class User extends \App\Models\User
 {

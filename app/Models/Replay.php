@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Replay whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Replay whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Article $article
+ * @property-read \App\Models\Replay $replayComment
+ * @property-read \App\Models\User $user
  */
 class Replay extends Model
 {

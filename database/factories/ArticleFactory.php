@@ -13,6 +13,7 @@ $factory->define(\App\Models\Article::class, function (Faker $faker) use($users,
         'title' => $faker->sentence(),
         'content' => $faker->text(),
         'excerpt' => $faker->sentence(),
+        'status' => 1,
         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
     ];

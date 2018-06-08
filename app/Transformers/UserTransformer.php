@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['avatar'];
+    protected $availableIncludes = ['avatar'];
 
     public function transform(User $user)
     {
@@ -26,6 +26,10 @@ class UserTransformer extends TransformerAbstract
 
     public function includeAvatar(User $user)
     {
+        if (! $user->avatar) {
+            return $this->null();
+        }
+
         return $this->item($user->avatar, new FileTransformers());
     }
 

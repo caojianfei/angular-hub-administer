@@ -26,6 +26,11 @@ use App\Http\Traits\JWTSubject as JWTSubjectTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ * @property int|null $avatar_id
+ * @property array $information 个人资料
+ * @property-read \App\Models\File|null $avatar
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAvatarId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereInformation($value)
  */
 class User extends Authenticatable implements JWTSubject
 {

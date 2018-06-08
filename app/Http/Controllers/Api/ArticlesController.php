@@ -42,8 +42,22 @@ class ArticlesController extends BaseController
             $query->latest('last_replay_time');
         }
 
-        $articles = $query->paginate(\request('per_page', 20));
+        // 零回复
+        if (request('no_replay')) {
+            $query->doesntHave('comments');
+        }
 
+        // 待解决
+        if (request('waitting_resolve')) {
+            $query->where('answer_id', 0);
+        }
+
+        //已解决
+        if (request('resolved')) {
+            $query->where('answer_id', '>', 0);
+        }
+
+        $articles = $query->paginate(\request('per_page', 20));
         return $this->response->paginator($articles, new ArticleTransformer());
     }
 

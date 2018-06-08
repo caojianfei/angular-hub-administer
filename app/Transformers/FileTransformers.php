@@ -7,15 +7,12 @@ use League\Fractal\TransformerAbstract;
 
 class FileTransformers extends TransformerAbstract
 {
-    public function transform($file)
+    public function transform(File $file)
     {
-        if ($file instanceof File) {
-            return [
-                'id' => $file->id,
-                'url' => asset($file->save_path)
-            ];
-        }
-        return [];
+        return [
+            'id' => $file->id,
+            'url' => asset($file->save_path)
+        ];
     }
 
 }

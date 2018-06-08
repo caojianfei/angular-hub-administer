@@ -26,6 +26,8 @@ class CreateArticlesTable extends Migration
             $table->integer('order')->default(0)->comment('排序');
             $table->text('excerpt')->comment('摘要');
             $table->string('slug')->nullable()->comment('文章名称标识，seo使用');
+            $table->integer('answer_id')->comment('问题的回答，对应replay表的回复')->default(0);
+            $table->tinyInteger('status')->comment('文章状态：0-草稿；1-正式发布');
             $table->dateTime('last_replay_time')->comment('最新回复时间')->nullable();
             $table->timestamps();
         });
