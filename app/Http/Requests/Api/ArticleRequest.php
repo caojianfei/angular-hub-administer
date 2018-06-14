@@ -33,7 +33,8 @@ class ArticleRequest extends FormRequest
                             'required',
                             'integer',
                             'exists:categories,id'
-                        ]
+                        ],
+                        'status' => 'required|numeric|in:0,1'
                     ];
                 }
             case 'PATCH':

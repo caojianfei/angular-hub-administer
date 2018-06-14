@@ -28,6 +28,10 @@ class ReplayTransformers extends TransformerAbstract
 
     public function includeReplayComment(Replay $replay)
     {
+        if (! $replay->replay_id) {
+            return $this->null();
+        }
+
         return $this->item($replay->replayComment, new ReplayTransformers());
     }
 
