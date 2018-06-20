@@ -15,6 +15,7 @@ class ReplayTransformers extends TransformerAbstract
             'id' => $replay->id,
             'user_id' => $replay->user_id,
             'article_id' => $replay->article_id,
+            'replay_id' => $replay->replay_id,
             'content' => $replay->content,
             'created_at' => $replay->created_at->diffForHumans(),
             'updated_at' => $replay->updated_at->diffForHumans()
