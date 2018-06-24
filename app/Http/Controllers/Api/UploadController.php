@@ -40,6 +40,36 @@ class UploadController extends BaseController
 
     }
 
+    public function editormdImageUpload(Request $request)
+    {
+        $callback_url = $request->callback;
+        $dialog_id = $request->dialog_id;
+        $temp = date('ymdhis');
+
+        $validator = \Validator::make($request->all(), [
+            'editormd-image-file' => 'required|image|max:5242880'
+        ]);
+
+        if ($validator->fails()) {
+            $message = $validator->errors()->getMessages()['editormd-image-file'][0];
+            $success = 0;
+        } else {
+            $result = $this->save($request->file('editormd-image-file'), 'images');
+            $url = $result['url'];
+            $success = 1;
+            $message = '上传成功';
+        }
+
+        $redirect_url = $callback_url . '?' . http_build_query([
+                'dialog_id' => $dialog_id,
+                'temp' => $temp,
+                'success' => $success,
+                'message' => $message,
+                'url' => $url ?? null
+            ]);
+        return redirect($redirect_url);
+    }
+
     /**
      * 图片保存及数据入库
      *
