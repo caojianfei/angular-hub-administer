@@ -26,6 +26,7 @@ class ArticleTransformer extends TransformerAbstract
             'slug' => $article->slug,
             'last_replay_time' => $article->last_replay_time,
             'answer_id' => $article->answer_id,
+            'share_link' => $article->share_link,
             'status' => $article->status,
             'created_at' => $article->created_at->diffForHumans(),
             'updated_at' => $article->updated_at->diffForHumans(),

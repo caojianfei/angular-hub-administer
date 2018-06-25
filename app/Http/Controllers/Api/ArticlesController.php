@@ -104,7 +104,7 @@ class ArticlesController extends BaseController
     {
         $this->authorize('update', $article);
 
-        $article->update($request->only(['title', 'content', 'category_id']));
+        $article->update($request->only(['title', 'content', 'share_link', 'tags', 'write_type']));
 
         if ($request->tags) {
             $article->tags()->sync($request->tags);

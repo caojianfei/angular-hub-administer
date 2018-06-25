@@ -25,9 +25,10 @@ class ArticleRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 {
-                    return[
+                    $category_id = $this->category_id;
+
+                    $rule = [
                         'title' => 'required|string',
-                        'content' => 'required|string',
                         'tags' => 'required|array',
                         'category_id' => [
                             'required',
@@ -36,12 +37,18 @@ class ArticleRequest extends FormRequest
                         ],
                         'status' => 'required|numeric|in:0,1'
                     ];
+
+                    if ($category_id && $category_id !== 3) {
+                        $rule['content'] = 'required|string';
+                    }
+
+                    return $rule;
                 }
             case 'PATCH':
                 {
                     return [
                         'title' => 'string',
-                        'content' => 'string',
+                        'content' => 'string|nullable',
                         'tags' => 'array',
                         'category_id' => [
                             'integer',

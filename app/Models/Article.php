@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     public $fillable = [
-        'title', 'content', 'category_id', 'excerpt', 'slug', 'write_type'
+        'title', 'content', 'category_id', 'excerpt', 'slug', 'write_type', 'share_link'
     ];
 
     /**
@@ -122,6 +122,21 @@ class Article extends Model
         return $query->orderBy('replay_count', 'desc')
             ->orderBy('like_count', 'desc')
             ->orderBy('view_count', 'desc');
+    }
+
+    public function getWriteTypeAttribute($value)
+    {
+        switch ($value)
+        {
+            case 0:
+                return '原创';
+            case 1:
+                return '转载';
+            case 2:
+                return '翻译';
+            default:
+                return null;
+        }
     }
 
 }
