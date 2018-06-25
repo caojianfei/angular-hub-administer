@@ -2,8 +2,10 @@
 
 use Faker\Generator as Faker;
 
-$users = \App\Models\User::pluck('id')->toArray();
-$categories = \App\Models\Category::pluck('id')->toArray();
+//$users = \App\Models\User::pluck('id')->toArray();
+//$categories = \App\Models\Category::pluck('id')->toArray();
+$users = [1,2,3,4,5];
+$categories = [1,2,3];
 
 $factory->define(\App\Models\Article::class, function (Faker $faker) use($users, $categories) {
     return [
