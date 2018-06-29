@@ -29,7 +29,7 @@ class ReplayTransformers extends TransformerAbstract
 
     public function includeReplayComment(Replay $replay)
     {
-        if (! $replay->replay_id) {
+        if (! $replay->replay_id || !$replay->replayComment) {
             return $this->null();
         }
 
