@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         \App\Models\Replay::class => \App\Policies\CommentPolicy::class,
         \App\Models\Article::class => \App\Policies\ArticlePolicy::class,
+
     ];
 
     /**

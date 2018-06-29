@@ -42,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     protected function registerModelObservers()
     {
         \App\Models\Article::observe(\App\Observers\ArticleObserver::class);
+        \App\Models\Replay::observe(\App\Observers\ReplayObservers::class);
     }
 
     protected function registeApiErrorCode()

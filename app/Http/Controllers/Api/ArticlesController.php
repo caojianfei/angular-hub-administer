@@ -89,6 +89,9 @@ class ArticlesController extends BaseController
      */
     public function show(Article $article)
     {
+        // 阅读量 +1 这么设计有些不合理
+        $article->increment('view_count');
+
         return $this->response->item($article, new ArticleTransformer());
     }
 

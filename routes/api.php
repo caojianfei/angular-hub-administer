@@ -53,6 +53,10 @@ $api->version('v1', [
         $api->resource('tags', 'TagsController');
         // 点赞
         $api->post('article/{article}/like', 'ArticleLikeController@store');
+        // 确认当前登录用户是否点过赞
+        $api->get('article/{article}/liked', 'ArticleLikeController@islike');
+        // 取消点赞
+        $api->delete('article/{article}/like', 'ArticleLikeController@delete');
         // 获取当前登录的用户
         $api->get('user', 'UsersController@me')->name('user.show');
         // 个人信息修改
