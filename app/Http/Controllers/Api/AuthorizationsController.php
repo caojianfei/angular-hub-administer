@@ -7,6 +7,17 @@ use Dingo\Api\Exception\ValidationHttpException;
 
 class AuthorizationsController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('store');
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param AuthorizationRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function store(AuthorizationRequest $request)
     {
         if (! $token = auth('api')->attempt(request(['email', 'password']))) {
@@ -14,6 +25,18 @@ class AuthorizationsController extends BaseController
         }
 
         return $this->responseSuccessLogin($token);
+    }
+
+    /**
+     * 退出登录
+     *
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destroy()
+    {
+        auth('api')->logout();
+
+        return $this->response->noContent();
     }
 
 

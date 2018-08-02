@@ -34,6 +34,8 @@ $api->version('v1', [
         $api->post('password/email', 'PasswordsController@store')->name('password.email');
         // 重置密码
         $api->patch('password', 'PasswordsController@update')->name('password.update');
+        // 退出
+        $api->delete('authorizations', 'AuthorizationsController@destroy')->name('authorizations.destroy');
     });
 
     // 普通请求

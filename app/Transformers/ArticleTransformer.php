@@ -13,7 +13,7 @@ class ArticleTransformer extends TransformerAbstract
     {
         return [
             'id' => $article->id,
-            'user_id' => $article->id,
+            'user_id' => $article->user_id,
             'write_type' => $article->write_type,
             'title' => $article->title,
             'content' => $article->content,
