@@ -65,9 +65,13 @@ $api->version('v1', [
         $api->patch('user', 'UsersController@update')->name('user.update');
         // 文章回复
         $api->post('article/{article}/comments', 'CommentsController@store')->name('comments.store');
+        // 提问选择最佳答案
+        $api->patch('article/{article}/comment/{replay}', 'ArticlesController@chooseAnswer');
+
         $api->get('comments/{replay}', 'CommentsController@show')->name('comments.show');
         $api->patch('comments/{replay}', 'CommentsController@update')->name('comments.update');
         $api->delete('comments/{replay}', 'CommentsController@destroy')->name('comments.destroy');
+
     });
 
 

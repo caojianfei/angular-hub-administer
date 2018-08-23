@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
+use App\Models\Replay;
 use App\Transformers\ArticleTransformer;
 use App\Http\Requests\Api\ArticleRequest;
 
@@ -130,5 +131,35 @@ class ArticlesController extends BaseController
         $article->delete();
 
         return $this->response->noContent();
+    }
+
+    /**
+     * 设置提问的答案
+     *
+     * @param \Request $request
+     * @param Article $article
+     * @param Replay $replay
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function chooseAnswer(\Request $request, Article $article, Replay $replay)
+    {
+        $this->authorize('update', $article);
+
+        if ($article->category_id != 2) {
+            $this->response->error('不是问答类文章', 500);
+        }
+        if ($article->answer_id != 0) {
+            $this->response->error('该提问已经设置了答案', 500);
+        }
+
+        if ($replay->article_id != $article->id) {
+            $this->response->error('不是该文章的回复', 500);
+        }
+
+        $article->answer_id = $replay->id;
+        $article->save();
+
+        return $this->response->item($article, new ArticleTransformer());
     }
 }
