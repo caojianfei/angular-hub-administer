@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     public $fillable = [
-        'title', 'content', 'category_id', 'excerpt', 'slug', 'write_type', 'share_link'
+        'title', 'content', 'category_id', 'excerpt', 'slug', 'write_type', 'share_link', 'status'
     ];
 
     /**
