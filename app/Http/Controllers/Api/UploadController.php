@@ -88,9 +88,7 @@ class UploadController extends BaseController
 
         $file_name = $file_name ?? time() . '_' . str_random(12) . '.' . $extension;
 
-        $file->move($path, $file_name);
-
-        $model = \App\Models\File::create([
+	$model = \App\Models\File::create([
             'user_id' => auth('api')->id() ?? 0,
             'size' => $file->getSize(),
             'mine_type' => $file->getClientMimeType(),
@@ -98,7 +96,9 @@ class UploadController extends BaseController
             'original_extension' => $file->getClientOriginalExtension(),
             'save_path' => $floder . '/' . $file_name
         ]);
+        
 
+	$file->move($path, $file_name);
 
         return [
             'full_path' => $floder . '/' . $file_name,
